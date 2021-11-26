@@ -1,0 +1,45 @@
+{
+  "name": "webpack-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "webpack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@types/react": "^16.8.24",
+    "@types/react-dom": "^16.0.5",
+    "@types/styled-components": "^5.1.15",
+    "@types/webpack": "4.1.4",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-styled-components": "^2.0.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.4.3",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
