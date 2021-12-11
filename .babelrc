@@ -1,3 +1,21 @@
 {
-  "plugins": ["babel-plugin-styled-components"]
+  "plugins": [
+    [
+      "babel-plugin-styled-components"
+    ],
+    [
+      "module-resolver",
+      {
+        "cwd": "babelrc",
+        "extensions": [
+          ".ts",
+          ".tsx",
+          ".js"
+        ],
+        "alias": {
+          "src": "./src"
+        }
+      }
+    ]
+  ]
 }

@@ -12,7 +12,10 @@ module.exports = {
   },
   target: "web",
   resolve: {
-    extensions: [".ts", ".tsx", ".js"],
+    alias: {
+      "@": '/src',
+    },
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -32,20 +35,8 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "fonts/",
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.tsx?$/,
@@ -54,4 +45,8 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    static: path.resolve(__dirname, "dist"),
+    hot: true
+  }
 };
