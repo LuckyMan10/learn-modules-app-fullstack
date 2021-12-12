@@ -25,10 +25,23 @@ const useClickOut = (menuRef: React.RefObject<HTMLDivElement>): boolean => {
     return outClick;
 }
 
+const useContentHeight = (ref: React.RefObject<HTMLDivElement>): number => {
+    const [pageSize, setPageSize] = useState<number>(0);
+    useEffect(() => {
+        if(ref.current) {
+            const clientHeight = ref.current.clientHeight;
+            if(window.innerHeight > clientHeight) {
+                setPageSize(window.innerHeight)
+            }
+        }
+    }, [pageSize]);
+    return pageSize
+}
 
 
 export {
     useAppDispatch,
     useAppSelector,
-    useClickOut
+    useClickOut,
+    useContentHeight
 }

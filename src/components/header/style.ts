@@ -22,6 +22,7 @@ const StyledHeader = Styled.header`
         padding: 0px 20px;
     }
     .menu-wrapper {
+        z-index: 15;
         position: relative;
         width: 260px;
         height: 50px;
