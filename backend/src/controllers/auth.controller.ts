@@ -1,0 +1,135 @@
+import { Controller, Get, Post, Put, Delete, Res, Req } from '@nestjs/common';
+import { Injectable, Scope, Inject } from '@nestjs/common';
+import { Body } from '@nestjs/common';
+import { Request, Response } from 'express';
+import { UserRegDto } from 'dtos/userReg.dto';
+import { UserLoginDto } from 'dtos/userLogin.dto';
+import { AuthService } from 'services/auth.service';
+import { HttpException } from '@nestjs/common/exceptions/http.exception';
+import { HttpStatus } from '@nestjs/common';
+import { PayloadUser } from 'interfaces/userPayload.interface';
+import { UserData } from 'interfaces/userData.interface';
+import { ValidationPipe } from '@nestjs/common';
+import { UsePipes } from '@nestjs/common';
+
+@Controller('auth')
+@Injectable()
+export class AuthController {
+    constructor(
+        private authService: AuthService
+    ) { }
+
+    @Post('registration')
+    @UsePipes(
+        new ValidationPipe({
+            transform: true,
+            whitelist: true,
+            forbidNonWhitelisted: true,
+        }),
+    )
+    async registration(
+        @Res({ passthrough: true }) response: Response,
+        @Body() userRegDto: UserRegDto
+    ): Promise<UserData<PayloadUser> | HttpException> {
+        try {
+            const { username, password, email } = userRegDto;
+            const userData = await this.authService.registration({
+                email,
+                password,
+                username
+            });
+            response.cookie("refreshToken", userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            });
+            return userData
+        } catch (e) {
+            console.log('e: ', e)
+            return new HttpException({ message: e }, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Post('login')
+    @UsePipes(
+        new ValidationPipe({
+            transform: true,
+            whitelist: true,
+            forbidNonWhitelisted: true,
+        }),
+    )
+    async login(
+        @Res({ passthrough: true }) response: Response,
+        @Body() userLoginDto: UserLoginDto
+    ): Promise<UserData<PayloadUser> | HttpException> {
+        try {
+            const { email, password } = userLoginDto;
+            const userData = await this.authService.login({ email, password });
+            response.cookie("refreshToken", userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            });
+            return userData
+        } catch (e) {
+            console.log('e: ', e)
+            return new HttpException({ message: e }, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Get('refresh')
+    async refresh(
+        @Res({ passthrough: true }) response: Response,
+        @Req() request: Request
+    ): Promise<UserData<PayloadUser> | HttpException> {
+        try {
+            const { refreshToken } = request.cookies;
+            if (!refreshToken || refreshToken === "undefined") {
+                throw "Требуется авторизация";
+            }
+            const userData = await this.authService.refresh(refreshToken);
+            response.cookie("refreshToken", userData.refreshToken, {
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+            });
+            return userData
+        } catch (e) {
+            console.log('e: ', e)
+            return new HttpException({ message: e }, HttpStatus.UNAUTHORIZED);
+        }
+    }
+    @Delete('delete')
+    async delete(
+        @Res({ passthrough: true }) response: Response,
+        @Req() request: Request
+    ): Promise<HttpException | { message: string }> {
+        try {
+            const { refreshToken } = request.cookies;
+            if (!refreshToken || refreshToken === "undefined") {
+                throw "Требуется авторизация";
+            }
+            const removeUser = await this.authService.remove(refreshToken);
+            response.clearCookie("refreshToken");
+            return removeUser;
+        } catch (e) {
+            console.log('e: ', e)
+            return new HttpException({ message: e }, HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @Get('logout')
+    async logout(
+        @Res({ passthrough: true }) response: Response,
+        @Req() request: Request
+    ): Promise<HttpException | { message: string }> {
+        try {
+            const { refreshToken } = request.cookies;
+            if (!refreshToken || refreshToken === "undefined") {
+                throw "Требуется авторизация";
+            }
+            const logoutUser = await this.authService.logout(refreshToken);
+            response.clearCookie("refreshToken");
+            return logoutUser;
+        } catch (e) {
+            return new HttpException({ message: e }, HttpStatus.FORBIDDEN);
+        }
+    }
+}

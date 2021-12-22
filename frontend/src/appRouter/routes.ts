@@ -3,6 +3,7 @@ import {AllModulesPage} from "@/pages/allModules";
 import { AuthPage } from "@/pages/auth";
 import {ActiveModulesPage} from "@/pages/activeModules";
 import { ArchivePage } from "@/pages/archive";
+import {SandboxPage} from "@/pages/sandbox";
 
 const authRoutes = [
     {
@@ -23,6 +24,10 @@ const publicRoutes = [
     {
         path: appRouterEnum.AUTH,
         Component: AuthPage
+    },
+    {
+        path: appRouterEnum.SANDBOX,
+        Component: SandboxPage
     }
 ]
 

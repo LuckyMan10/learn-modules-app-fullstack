@@ -6,17 +6,8 @@ import { Footer } from "@/components/footer";
 import { authRoutes, publicRoutes } from "./routes";
 import {useContentHeight} from "@/app/hooks";
 import { appRouterEnum } from "./enum";
-import Styled from "styled-components";
+import {AppStyle} from "./style";
 
-const AppStyle = Styled.div<{ pageSize: number }>`
-    .content {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        height: ${(props) => props.pageSize ? ((props.pageSize - 140) + "px") : "initial"};
-        
-    }
-`
 
 const AppRouter: React.FC = () => {
     const auth = true;
