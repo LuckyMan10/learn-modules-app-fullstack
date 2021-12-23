@@ -1,6 +1,6 @@
 # learn-modules-app-fullstack
-install backend dependencies: cd ./backend && npm install
-install frontend dependencies: cd ./frontend && npm install
+<strong>install backend dependencies:</strong> cd ./backend && npm install <br />
+<strong>install frontend dependencies:</strong> cd ./frontend && npm install <br />
 
-start client: npm run start-client
-start server: npm run start-server
+<strong>start client:</strong> npm run start-client <br />
+<strong>start server:</strong> npm run start-server <br />
