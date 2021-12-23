@@ -10,7 +10,7 @@ import {AppStyle} from "./style";
 
 
 const AppRouter: React.FC = () => {
-    const auth = true;
+    const auth = false;
     const appRef = useRef() as React.RefObject<HTMLDivElement>;
     const pageSize = useContentHeight(appRef);
     return (

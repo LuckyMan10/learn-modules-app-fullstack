@@ -36,6 +36,6 @@ export class UserModule {
     configure(consumer: MiddlewareConsumer) {
         consumer
             .apply(CheckAuthMiddleware)
-            .forRoutes('user')
+            .forRoutes('api/user')
     }
 }

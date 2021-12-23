@@ -15,7 +15,7 @@ import { queryDto } from 'dtos/query.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { UsePipes } from '@nestjs/common';
 
-@Controller('user')
+@Controller('api/user')
 @Injectable()
 export class UserController {
     constructor(
@@ -40,9 +40,8 @@ export class UserController {
     @Put('accountInfo')
     @UsePipes(
         new ValidationPipe({
-            transform: true,
-            whitelist: true,
-            forbidNonWhitelisted: true,
+            skipUndefinedProperties: true,
+            whitelist: true
         }),
     )
     async updateAccountInfo(

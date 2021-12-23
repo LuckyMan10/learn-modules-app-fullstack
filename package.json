@@ -5,19 +5,20 @@
     "main": "index.js",
     "private": true,
     "scripts": {
-      "prod": "node backend/dist/main",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "cd frontend && npm run-script start",
-      "build": "cd frontend && npm run-script build"
+        "prod": "node backend/dist/main",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start-client": "cd frontend && npm run-script start",
+        "start-server": "cd backend && npm run-script start",
+        "build": "cd frontend && npm run-script build"
     },
     "keywords": [
-      "react",
-      "typescript",
-      "webpack"
+        "react",
+        "typescript",
+        "webpack"
     ],
     "author": "",
     "license": "ISC",
-    "devDependencies": {},
-    "dependencies": {}
-  }
-  
+    "dependencies": {
+        "uuid": "^8.3.2"
+    }
+}

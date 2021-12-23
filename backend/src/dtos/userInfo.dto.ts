@@ -1,4 +1,11 @@
+import { IsNotEmpty, IsNumber } from "class-validator";
+
 export class updateUserInfoDto {
-    successfulTests?: number;
-    failedTests?: number;
+    @IsNumber()
+    @IsNotEmpty()
+    successfulTests: number;
+
+    @IsNumber()
+    @IsNotEmpty()
+    failedTests: number;
 }

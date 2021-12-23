@@ -14,7 +14,7 @@ align-items: center;
     padding: 30px 10px;
     display: flex;
     align-items: center;
-    width: 55%;
+    width: 50%;
     flex-direction: column;
 }
 .forms {

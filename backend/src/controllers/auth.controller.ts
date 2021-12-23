@@ -12,7 +12,7 @@ import { UserData } from 'interfaces/userData.interface';
 import { ValidationPipe } from '@nestjs/common';
 import { UsePipes } from '@nestjs/common';
 
-@Controller('auth')
+@Controller('api/auth')
 @Injectable()
 export class AuthController {
     constructor(

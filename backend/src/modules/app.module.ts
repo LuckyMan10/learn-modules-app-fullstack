@@ -19,6 +19,6 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(CheckConnectMiddleware)
-      .forRoutes('auth', 'user')
+      .forRoutes('api/auth', 'api/user');
   }
 }
