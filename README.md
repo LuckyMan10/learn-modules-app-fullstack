@@ -84,3 +84,13 @@ required request.headers.authorization.accessToken<br />
 type: DELETE<br />
 query: id(not required)<br />
 if an id does not exist, will be removed all from archive. If id exist just one.<br />
+<hr />
+<i>api/user/dump</i><br />
+type: GET<br />
+response: (see modulesDB in backend/interfaces/accountInfo)<br />
+required request.headers.authorization.accessToken<br />
+<hr />
+<i>api/user/dump</i><br />
+type: DELETE<br />
+query: id(not required)<br />
+if an id does not exist, will be removed all from archive. If id exist just one.<br />
