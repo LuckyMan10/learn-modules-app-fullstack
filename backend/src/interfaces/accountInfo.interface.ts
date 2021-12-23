@@ -1,15 +1,7 @@
 import { moduleI } from "./module.interface";
 
-export interface accountInfoI {
-    regData: string;
-    successfulTests: number;
-    failedTests: number;
-    email: string;
-    username: string;
-    userId: string;
-}
 
-export interface accountInfoDBI {
+export type accountInfoDB = {
     regData: string;
     successfulTests: number;
     failedTests: number;
@@ -20,7 +12,9 @@ export interface accountInfoDBI {
     __v?: number;
 }
 
-export interface modulesDBI {
+export type accountInfoI = Omit<accountInfoDB, "_id" | "__v">
+
+export interface modulesDB {
     userId: string;
     modules: moduleI[];
     _id: string;

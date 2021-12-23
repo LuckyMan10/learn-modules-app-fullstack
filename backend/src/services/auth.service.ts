@@ -20,7 +20,7 @@ export class AuthService {
     private readonly userService: UserService
   ) { }
 
-  async registration(user: UserI): Promise<UserData<PayloadUser>> {
+  async registration(user: UserI): Promise<UserData> {
     try {
       const { email, password, username } = user;
       const candidate = await this.userModel.findOne({ email });
@@ -52,7 +52,7 @@ export class AuthService {
     }
 
   }
-  async login({ email, password }: UserLogin): Promise<UserData<PayloadUser>> {
+  async login({ email, password }: UserLogin): Promise<UserData> {
     try {
       const user = await this.userModel.findOne({ email });
       if (!user) {
@@ -72,7 +72,7 @@ export class AuthService {
     }
 
   }
-  async refresh(refreshToken: string): Promise<UserData<PayloadUser>> {
+  async refresh(refreshToken: string): Promise<UserData> {
     try {
       const userData = this.tokenService.validateRefreshToken(refreshToken);
       const tokenFromDb = await this.tokenService.findToken(refreshToken);

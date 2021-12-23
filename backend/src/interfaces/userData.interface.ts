@@ -1,5 +1,7 @@
-export interface UserData<T> {
+import {PayloadUser} from './userPayload.interface';
+
+export type UserData = {
     accessToken: string;
     refreshToken: string;
-    user: T;
+    user: PayloadUser;
 }
